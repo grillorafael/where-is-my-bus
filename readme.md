@@ -11,3 +11,6 @@ To install the harp web server you hape to have ```npm```and ```nodejs```install
 http://nodejs.org/ - NodeJS
 https://npmjs.org/ - NPMJS
 http://harpjs.com/ - HarpJS
+
+
+There is a working demo here http://where-is-my-bus.rgrillo.com/
