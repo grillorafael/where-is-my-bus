@@ -1,0 +1,10 @@
+!!!
+html
+  head
+    title="Where is my Bus?!"
+    link(rel="stylesheet", href="/main.css")
+    script(src="jquery.js")
+    script(src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&sensor=true")
+    script(src="maps.js")
+  body
+    != yield
