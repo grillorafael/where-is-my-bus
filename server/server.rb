@@ -1,7 +1,6 @@
-# require 'pry'
+#require 'pry'
 require 'em-websocket'
 
-clients = Array.new
 EventMachine::WebSocket.start(host: "127.0.0.1", port: 5000) do |ws|
   ws.onopen do |handshake|
     puts "WebSocket opened #{{
