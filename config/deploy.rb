@@ -32,14 +32,15 @@ ssh_options[:keys] = ["~/Downloads/myhosts.pem"]
 # this tells capistrano what to do when you deploy
 namespace :deploy do
 
-  desc <<-DESC
-  A macro-task that updates the code and fixes the symlink.
-  DESC
+  desc 'A macro-task that updates the code and fixes the symlink.'
   task :default do
     transaction do
       update_code
       create_symlink
+
+      dependencies
       compile_harp
+      restart_server
     end
   end
 
@@ -52,11 +53,20 @@ namespace :deploy do
     cleanup
   end
 
+  task :dependencies do
+    run "bundle install"
+    run "npm install"
+  end
+
   task :compile_harp do
     run "harp compile #{deploy_to}/current"
     run "sudo rm -r #{deploy_to}/current/public/ #{deploy_to}/current/harp.json #{deploy_to}/current/readme.md"
     run "sudo mv #{deploy_to}/current/www/* #{deploy_to}/current/."
     run "sudo rm -r #{deploy_to}/current/www"
+  end
+
+  task :restart_server do
+    #TODO
   end
 
 end
