@@ -63,7 +63,7 @@ class Server
     constructor: (map, verbose = false) ->
         @verbose = verbose
         @map = map
-        @ws = new WebSocket("ws://localhost:5000")
+        @ws = new WebSocket("ws://checkers.rgrillo.com:5000")
         @ws.onmessage = @onMessage
         @ws.onClose = @onClose
         @ws.onopen = @onOpen
