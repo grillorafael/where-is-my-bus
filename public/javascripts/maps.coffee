@@ -1,3 +1,18 @@
+class Resource
+    imagePath = "/images/"
+    constructor: (id, type, label, latitude, longitude, marker = null) ->
+        @id = id
+        @type = type
+        @label = label
+        @latitude = latitude
+        @longitude = longitude
+        @marker = marker
+    icon: ->
+        icons =
+            bus: "#{imagePath}bus.png"
+        icons[@type]
+
+
 class Map
     constructor: ->
         mapOptions =
@@ -8,14 +23,14 @@ class Map
         @markers = {}
         @map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
 
-    insertPin: (id, latitude, longitude, opts = null) ->
-        if @markers[id]
-            @removeMarker @markers[id]
+    insertPin: (resource) ->
+        if @markers[resource.id]
+            @removeMarker @markers[resource.id]
 
-        position = new google.maps.LatLng latitude, longitude
-        options = $.extend {}, {position: position, map: @map}, opts
-        marker = new google.maps.Marker options
-        @markers[id] = marker
+        position = new google.maps.LatLng resource.latitude, resource.longitude
+        options = {position: position, map: @map, icon: resource.icon()}
+        resource.marker = new google.maps.Marker options
+        @markers[resource.id] = resource
 
     centerUserPosition: (zoom = 15) ->
         if navigator.geolocation
@@ -26,13 +41,14 @@ class Map
         else
             console.log "Not supported"
 
-    removeMarker: (marker) ->
-        marker.setMap null
+    removeMarker: (resource) ->
+        resource.marker.setMap null
+        resource.marker = null
 
     clearMarkers: ->
         while @markers.length > 0
-            marker = @markers.pop()
-            marker.setMap null
+            resource = @markers.pop()
+            resource.marker.setMap null
 
 # This should be reviewed
 # The Map Object is in the following format:
@@ -48,19 +64,22 @@ class Server
         @verbose = verbose
         @map = map
         @ws = new WebSocket("ws://localhost:5000")
-        @ws.onmessage = @onMessage;
-        @ws.onClose = @onClose;
-        @ws.onopen = @onOpen;
+        @ws.onmessage = @onMessage
+        @ws.onClose = @onClose
+        @ws.onopen = @onOpen
+        @ws.onerror = @onError
 
     onMessage: (msg) =>
         @console "Message Received" + msg.data
         data = JSON.parse msg.data
-
-        @map.insertPin data.id, data.latitude, data.longitude
+        resource = new Resource(data.id, data.type, data.label, data.latitude, data.longitude)
+        @map.insertPin resource
     onClose: (event) =>
         @console "Connection Closed"
     onOpen: (msg) =>
         @console "Connection Stablished"
+    onError: (msg) =>
+        @console "An Error Occoured"
     console: (msg) =>
         if @verbose
             date = new Date()
@@ -71,8 +90,21 @@ class Server
 map = server = null
 $ ->
     map = new Map()
-    server = new Server(map, true)
+    server = new Server map, true
+    setTimeout (-> simulateBus -22.9033059, -43.12542000 ), 500
 
+
+simulateBus = (lat, long) ->
+    setTimeout (->
+        simulateBus lat, long + 0.0003
+    ), 1000
+
+    server.ws.send(JSON.stringify(
+      id: 2
+      type: "bus"
+      latitude: lat
+      longitude: long
+    ))
 
 
 

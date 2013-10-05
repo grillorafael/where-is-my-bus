@@ -2,9 +2,11 @@
 html
   head
     title="Where is my Bus?!"
-    link(rel="stylesheet", href="/main.css")
-    script(src="jquery.js")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+    link(rel="stylesheet", href="/stylesheets/main.css")
+    script(src="/javascripts/jquery.js")
     script(src="https://maps.googleapis.com/maps/api/js?key=#{api_key}&sensor=true")
-    script(src="maps.js")
+    script(src="/javascripts/maps.js")
   body
     != yield
