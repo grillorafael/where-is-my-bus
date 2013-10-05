@@ -20,8 +20,10 @@ There is a working demo here http://where-is-my-bus.rgrillo.com/
 
 After everything is installed you just have to do some simple commands inside the project folder
 
-```bundle install```to install ruby gems
+```bundle install``` to install ruby gems
+
+```npm install``` to install npm modules
 
 ```harp server``` to Start your Server
 
-```ruby server.rb```Inside the server folder to start the websocket server
+```ruby server.rb``` Inside the server folder to start the websocket server
