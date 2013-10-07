@@ -63,7 +63,7 @@ class Server
     constructor: (map, verbose = false) ->
         @verbose = verbose
         @map = map
-        @ws = new WebSocket("ws://checkers.rgrillo.com:5000")
+        @ws = new WebSocket("ws://127.0.0.1:5000")
         @ws.onmessage = @onMessage
         @ws.onClose = @onClose
         @ws.onopen = @onOpen
@@ -91,7 +91,7 @@ map = server = null
 $ ->
     map = new Map()
     server = new Server map, true
-    setTimeout (-> simulateBus -22.9033059, -43.12542000 ), 500
+    #setTimeout (-> simulateBus -22.9033059, -43.12542000 ), 500
 
 
 simulateBus = (lat, long) ->
