@@ -1,0 +1,35 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0
+}
+
+#map-canvas {
+  height: 100%
+}
+
+#console-viewer{
+  margin-top: 10px;
+  background-color: #000000;
+  height: 300px;
+  overflow-y: auto;
+}
+
+#console-viewer ul {
+  font-family: Courier;
+  padding-left: 0;
+}
+
+#console-viewer ul li:before{
+  content: "> "
+}
+
+#console-viewer ul li{
+
+  list-style-type: none;
+  color: #00CC00;
+}
