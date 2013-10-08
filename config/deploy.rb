@@ -41,7 +41,7 @@ namespace :deploy do
       # dependencies
       compile_harp
       # change_env
-      restart_server
+      # restart_server
     end
   end
 
@@ -75,10 +75,10 @@ namespace :deploy do
   end
 
   task :restart_server do
-    #run "sudo service wheresmy stop"
-    run "sudo rm /etc/init/wheresmy.conf"
+    # run "sudo service wheresmy stop"
+    # run "sudo rm /etc/init/wheresmy.conf"
     # run "sudo ln -s #{deploy_to}/current/server/wheresmy.conf /etc/init/wheresmy.conf"
-    #run "sudo service wheresmy start"
+    # run "sudo service wheresmy start"
   end
 
 end
