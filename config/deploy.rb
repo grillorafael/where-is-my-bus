@@ -71,9 +71,7 @@ namespace :deploy do
     data = YAML.load_file path
     data["env"] = "production"
 
-    File.open(path, 'w') do |f|
-      YAML.dump(data, f)
-    end
+    File.write(path, data.to_yaml)
   end
 
   task :restart_server do
