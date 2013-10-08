@@ -78,7 +78,7 @@ namespace :deploy do
 
   task :restart_server do
     run "sudo wheres_my stop"
-    run "sudo ln -s /etc/init/wheres_my.conf #{deploy_to}/current/server/wheres_my.conf"
+    run "sudo ln -s #{deploy_to}/current/server/wheres_my.conf /etc/init/wheres_my.conf"
     run "sudo wheres_my start"
   end
 
