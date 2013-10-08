@@ -61,7 +61,7 @@ namespace :deploy do
 
   task :compile_harp do
     run "harp compile #{deploy_to}/current"
-    # run "sudo rm -r #{deploy_to}/current/public/ #{deploy_to}/current/harp.json #{deploy_to}/current/readme.md #{deploy_to}/current/Capfile #{deploy_to}/current/Gemfile #{deploy_to}/current/Gemfile.lock #{deploy_to}/current/package.json "
+    run "sudo rm -r #{deploy_to}/current/public/ #{deploy_to}/current/harp.json #{deploy_to}/current/readme.md #{deploy_to}/current/Capfile #{deploy_to}/current/Gemfile #{deploy_to}/current/Gemfile.lock #{deploy_to}/current/package.json "
     run "sudo mv #{deploy_to}/current/www/* #{deploy_to}/current/."
     run "sudo rm -r #{deploy_to}/current/www"
   end
@@ -79,7 +79,7 @@ namespace :deploy do
   task :restart_server do
     #run "sudo service wheresmy stop"
     run "sudo rm /etc/init/wheresmy.conf"
-    run "sudo ln -s #{deploy_to}/current/server/wheresmy.conf /etc/init/wheresmy.conf"
+    # run "sudo ln -s #{deploy_to}/current/server/wheresmy.conf /etc/init/wheresmy.conf"
     #run "sudo service wheresmy start"
   end
 
