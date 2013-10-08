@@ -1,12 +1,14 @@
 class Broadcast
   constructor: (verbose = false) ->
     @verbose = verbose
-    @ws = new WebSocket("ws://127.0.0.1:5000")
-    @ws.onmessage = @onMessage
-    @ws.onClose = @onClose
-    @ws.onopen = @onOpen
-    @ws.onerror = @onError
-    @running = false
+    $.getJSON "/config.json", (data) =>
+      data = if data.env == "development" then data.development else data.production
+      @ws = new WebSocket("ws://"+data.server.js_host+":"+data.server.port)
+      @ws.onmessage = @onMessage
+      @ws.onClose = @onClose
+      @ws.onopen = @onOpen
+      @ws.onerror = @onError
+      @running = false
   start: ->
     if !@running
       @id = $(".id").val()

@@ -63,11 +63,13 @@ class Server
     constructor: (map, verbose = false) ->
         @verbose = verbose
         @map = map
-        @ws = new WebSocket("ws://127.0.0.1:5000")
-        @ws.onmessage = @onMessage
-        @ws.onClose = @onClose
-        @ws.onopen = @onOpen
-        @ws.onerror = @onError
+        $.getJSON "/config.json", (data) =>
+            data = if data.env == "development" then data.development else data.production
+            @ws = new WebSocket("ws://"+data.server.js_host+":"+data.server.port)
+            @ws.onmessage = @onMessage
+            @ws.onClose = @onClose
+            @ws.onopen = @onOpen
+            @ws.onerror = @onError
 
     onMessage: (msg) =>
         @console "Message Received" + msg.data
