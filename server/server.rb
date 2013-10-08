@@ -21,11 +21,7 @@ class Server
 
   def add_client(websocket)
     client = Client.new websocket
-    # client.name = assign_name(websocket.request["query"]["name"])
-    # send_all "e" + client.name                   # Alert other clients.
     @clients[websocket] = client
-    # websocket.send "n" + client.name             # Tell client what its assigned name is.
-    # websocket.send "s" + client_names.join(",")  # Tell client who is in the room.
   end
 
   def remove_client(websocket)

@@ -38,9 +38,10 @@ namespace :deploy do
       update_code
       create_symlink
 
-      dependencies
+      # dependencies
       compile_harp
-      restart_server
+      # change_env
+      # restart_server
     end
   end
 
@@ -65,8 +66,20 @@ namespace :deploy do
     run "sudo rm -r #{deploy_to}/current/www"
   end
 
+  task :change_env do
+    path = "#{deploy_to}/current/app_config.yml"
+    data = YAML.load_file path
+    data["env"] = "production"
+
+    File.open(path, 'w') do |f|
+      YAML.dump(data, f)
+    end
+  end
+
   task :restart_server do
-    #TODO
+    run "sudo wheres_my stop"
+    run "sudo ln -s /etc/init/wheres_my.conf #{deploy_to}/current/server/wheres_my.conf"
+    run "sudo wheres_my start"
   end
 
 end
