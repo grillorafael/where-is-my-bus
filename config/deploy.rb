@@ -9,7 +9,7 @@ set :application, "where-is-my-bus"
 set :repository, "file://#{File.expand_path('.')}"
 
 # or use a hosted repository
-#set :repository, "ssh://user@example.com/~/git/test.git"
+# set :repository, "ssh://user@example.com/~/git/test.git"
 
 server "#{domain}", :app, :web, :db, :primary => true
 

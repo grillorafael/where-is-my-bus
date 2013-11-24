@@ -2,6 +2,11 @@
   "name": "where-is-my-bus",
   "version": "0.0.0",
   "description": "where-is-my-bus ===============",
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/grillorafael/where-is-my-bus.git"
+  },
   "dependencies": {
     "harp": "0.9.3"
   }
