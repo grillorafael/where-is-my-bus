@@ -8,7 +8,11 @@ nav.navbar.navbar-inverse
     .form-group
       input.b-label.form-control(placeholder="Label", required)
     .form-group
-      input.type.form-control(placeholder="Type", required)
+      select.type.form-control(placeholder="Type", required)
+        option(value="bus") Bus
+        option(value="plane") Plane
+    .form-group
+      textarea.info.form-control(placeholder="Content", required)
     button#start-broadcasting.btn.btn-primary.btn-block Start Broadcasting
   #console-viewer.col-lg-12
     ul
