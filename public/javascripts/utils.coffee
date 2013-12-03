@@ -1,5 +1,7 @@
+
+
 gLatLng = (lat, lng) ->
-  new google.maps.LatLng lat, lng
+  return new google.maps.LatLng lat, lng
 
 getConfigInfo = (callback) ->
   $.getJSON "/config.json", (data) =>

@@ -1,5 +1,5 @@
 class Broadcast
-  constructor: (interval = 1000) ->
+  constructor: (interval = 500) ->
     @server = new Server(true)
     @interval = interval
     @running = false
@@ -32,7 +32,7 @@ class Broadcast
       date_text = currentTimeStampLabel()
       console_text = "#{date_text} #{msg}"
       $('#console-viewer ul').prepend("<li>#{console_text}</li>")
-  onMessage: (msg) ->
+  onMessage: (msg) =>
     @console "Message Received" + msg.data
 
 $ ->
